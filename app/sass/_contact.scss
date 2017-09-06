@@ -1,0 +1,16 @@
+.Contact {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  padding: 50px 0;
+}
+.Contact-wrapper {
+  @include display-flex();
+  @include justify-content(flex-end);
+}
+.Contact-form {
+  width: 50%;
+  .Form {
+    margin: 25px auto;
+    width: 70%;
+  }
+}

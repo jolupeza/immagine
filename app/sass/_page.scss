@@ -1,0 +1,19 @@
+.Page {
+  background-color: $white;
+  position: relative;
+  &--carousel {
+    &::before {
+      background-color: $black;
+      content: "";
+      display: block;
+      height: 260px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+  &--contact {
+    background-color: $blackDark;
+  }
+}

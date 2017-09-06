@@ -1,0 +1,21 @@
+body {
+  color: black;
+  font-family: "montserratregular";
+  font-size: 16px;
+}
+a {
+  @include transition(all 0.2s ease);
+  &:hover, &:focus {
+
+  }
+}
+p {
+  font-family: "montserratlight";
+  font-size: 0.875em;
+}
+.text-white {
+  color: white;
+}
+.text-red {
+  color: $red;
+}

@@ -1,0 +1,40 @@
+.Button {
+  display: inline-block;
+  font-family: "montserratmedium";
+  font-size: 0.875em;
+  padding: 15px 25px;
+  &--medium {
+    padding: 15px;
+  }
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+  &--red {
+    background-color: $red;
+    color: white;
+    &:hover, &:focus {
+      background-color: #fff;
+      color: black;
+    }
+    &--invert {
+      &:hover, &:focus {
+        background-color: $redSoft;
+        color: white;
+      }
+    }
+  }
+  &--white {
+    background-color: #fff;
+    color: black;
+    &:hover, &:focus {
+      background-color: $red;
+      color: white;
+    }
+  }
+  &--border {
+    border: 1px solid black;
+    &:hover, &:focus {
+      border-color: $red;
+    }
+  }
+}

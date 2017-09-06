@@ -1,0 +1,148 @@
+.Carousel {
+  &--home {
+    .carousel-indicators {
+      bottom: 100px;
+      left: 0;
+      margin-bottom: 0;
+      margin-left: 0;
+      width: 100%;
+      li {
+        height: 15px;
+        width: 15px;
+      }
+    }
+    .carousel-control {
+      @include align-items(center);
+      @include display-flex();
+      @include justify-content(center);
+      font-size: 2em;
+      @include opacity(1);
+      @include text-shadow(none);
+      width: 8%;
+      &.left, &.right {
+        background-image: none;
+        background-repeat: no-repeat;
+      }
+      i[class^="icon-"] {
+        background-color: $red;
+        padding: 5px;
+        @include transition(all 0.2s ease);
+      }
+      &:hover, &:focus {
+        i[class^="icon-"] {
+          background-color: #fff;
+          color: $red;
+        }
+      }
+    }
+    .carousel-caption {
+      @include align-content(center);
+      bottom: 0;
+      @include display-flex();
+      @include flex-wrap(wrap);
+      left: 0;
+      padding: 0;
+      right: 0;
+      @include text-shadow(none);
+      top: 0;
+      width: 50%;
+    }
+    .Caption {
+      margin-bottom: 15px;
+      margin-top: 0;
+      width: 100%;
+    }
+    .Caption-slogan {
+      color: black;
+      font-family: "montserratregular";
+      font-size: 1em;
+      font-style: italic;
+    }
+    .Caption-title {
+      color: white;
+      font-family: "albret";
+      font-size: 8.75em;
+    }
+    .Caption-background {
+      background-color: #fff;
+      display: inline-block;
+      padding: 5px 10px;
+    }
+    .Caption-buttons {
+      @include display-flex();
+      @include justify-content(center);
+      margin-top: 20px;
+      width: 100%;
+      .Button {
+        margin-right: 20px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  &--about {
+    padding-top: 90px;
+    .item {
+      img {
+        border: 8px solid $black;
+      }
+    }
+    .carousel-caption {
+      bottom: auto;
+      left: auto;
+      margin: 30px auto;
+      padding: 0;
+      position: relative;
+      right: auto;
+      @include text-shadow(none);
+      top: auto;
+      width: 60%;
+      p {
+        color: black;
+        font-size: 1.125em;
+        text-align: justify;
+      }
+    }
+    .Caption {
+
+    }
+    .Caption-title {
+      font-family: "montserratsemibold";
+      font-size: 2em;
+      font-style: italic;
+      margin-top: 0;
+    }
+    .Caption-slogan {
+      color: black;
+      font-family: "montserratmedium";
+      font-size: 1.25em;
+      font-style: italic;
+      margin-bottom: 30px;
+      margin-top: 0;
+    }
+    .carousel-control {
+      background-color: transparent;
+      bottom: auto;
+      color: rgba(black, 0.6);
+      font-size: 2em;
+      @include opacity(1);
+      @include text-shadow(none);
+      top: 280px;
+      width: auto;
+      &:focus, &:hover {
+        color: $redSoft;
+      }
+      &.right, &.left {
+        background-image: none;
+        background-repeat: no-repeat;
+      }
+      &.right {
+        right: 30%;
+      }
+      &.left {
+        left: 30%;
+      }
+    }
+  }
+}

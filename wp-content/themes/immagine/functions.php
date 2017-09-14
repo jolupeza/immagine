@@ -190,7 +190,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-// add_action('phpmailer_init', 'mailtrap');
+add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {
@@ -200,8 +200,8 @@ add_filter('wp_mail_from', function() {
 /***********************************************************/
 /* Register subscriptor via ajax */
 /***********************************************************/
-// add_action('wp_ajax_register_contact', 'register_contact_callback');
-// add_action('wp_ajax_nopriv_register_contact', 'register_contact_callback');
+add_action('wp_ajax_register_contact', 'register_contact_callback');
+add_action('wp_ajax_nopriv_register_contact', 'register_contact_callback');
 
 function register_contact_callback()
 {
@@ -211,42 +211,35 @@ function register_contact_callback()
     'error' => ''
   );
 
-  if (!wp_verify_nonce($nonce, 'cbbajax-nonce')) {
+  if (!wp_verify_nonce($nonce, 'immagineajax-nonce')) {
       die('¡Acceso denegado!');
   }
 
   $name = trim($_POST['contact_name']);
   $email = trim($_POST['contact_email']);
-  $subject = (int)trim($_POST['contact_subject']);
+  $phone = trim($_POST['contact_phone']);
+  $service = (int)trim($_POST['contact_service']);
   $message = trim($_POST['contact_message']);
-  $local = (int)trim($_POST['contact_local']);
 
-  if (!empty($name) && !empty($email) && is_email($email) && !empty($message) && $subject > 0) {
-    $options = get_option('cbb_custom_settings');
+  if (!empty($name) && !empty($email) && is_email($email) && preg_match('/^[0-9]+$/', $phone) && (strlen($phone) > 6 || strlen($phone) < 10) && !empty($message) && $service > 0) {
+    $options = get_option('immagine_custom_settings');
 
     $name = sanitize_text_field($name);
     $email = sanitize_email($email);
+    $phone = sanitize_text_field($phone);
     $message = sanitize_text_field($message);
 
-    // Validate Subject
-    $dataSubject = get_term_by('id', $subject, 'subjects');
+    // Validate Service
+    $dataService = get_term_by('id', $service, 'contact_services');
 
-    if (is_object($dataSubject)) {
-      // Get data Local
-      $dataLocal = ($local > 0) ? get_post($local) : null;
-
+    if (is_object($dataService)) {
       $receiverEmail = $options['email'];
 
       if (!isset($receiverEmail) || empty($receiverEmail)) {
         $receiverEmail = get_option('admin_email');
       }
 
-      if (!is_null($dataLocal)) {
-        $values = get_post_custom($dataLocal->ID);
-        $receiverEmail = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : $receiverEmail;
-      }
-
-      $subjectEmail = "Consulta Web Colegio Bertolt Brecht";
+      $subjectEmail = "Consulta Web Immagine";
 
       ob_start();
       $filename = TEMPLATEPATH . '/templates/email-contact.php';
@@ -256,13 +249,13 @@ function register_contact_callback()
         $content = ob_get_contents();
         ob_get_clean();
 
-        $headers[] = 'From: Colegio Bertolt Brecht';
+        $headers[] = 'From: Immagine Salón & Spa';
         //$headers[] = 'Reply-To: jolupeza@icloud.com';
         $headers[] = 'Content-type: text/html; charset=utf-8';
 
         if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {
           // Send email to customer
-          $subjectEmail = "Consulta enviada al Colegio Bertolt Brecht";
+          $subjectEmail = "Consulta enviada a Immagine Salón & Spa";
 
           ob_start();
           $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
@@ -274,7 +267,7 @@ function register_contact_callback()
             $content = ob_get_contents();
             ob_get_clean();
 
-            $headers[] = 'From: Colegio Bertolt Brecht';
+            $headers[] = 'From: Immagine Salón & Spa';
             //$headers[] = 'Reply-To: jolupeza@icloud.com';
             $headers[] = 'Content-type: text/html; charset=utf-8';
 
@@ -287,11 +280,9 @@ function register_contact_callback()
             ));
             update_post_meta($post_id, 'mb_name', $name);
             update_post_meta($post_id, 'mb_email', $email);
+            update_post_meta($post_id, 'mb_phone', $phone);
             update_post_meta($post_id, 'mb_message', $message);
-            if (!is_null($dataLocal)) {
-              update_post_meta($post_id, 'mb_local', $local);
-            }
-            wp_set_object_terms($post_id, $subject, 'subjects');
+            wp_set_object_terms($post_id, $service, 'contact_services');
 
             $result['result'] = true;
           } else {
@@ -306,7 +297,7 @@ function register_contact_callback()
         ob_get_clean();
       }
     } else {
-      $result['error'] = 'Debe seleccionar el asunto o tipo de consulta.';
+      $result['error'] = 'Debe seleccionar el servicio que le interesa.';
     }
   } else {
     $result['error'] = 'Verifique que ha ingresado los datos correctamente.';

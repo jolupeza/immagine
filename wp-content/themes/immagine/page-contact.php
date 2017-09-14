@@ -24,23 +24,47 @@
               <label for="contact_name" class="sr-only">Nombre</label>
               <input type="text" class="form-control" name="contact_name" id="contact_name" placeholder="Nombre" autocomplete="off" required />
             </div>
+
             <div class="form-group">
               <label for="contact_email" class="sr-only">Correo electrónico</label>
               <input type="email" class="form-control" name="contact_email" id="contact_email" placeholder="Correo electrónico" autocomplete="off" required>
             </div>
+
             <div class="form-group">
               <label for="contact_phone" class="sr-only">Teléfono</label>
-              <input type="text" class="form-control" name="contact_phone" id="contact_phone" placeholder="Teléfono" autocomplete="off" required>
+              <input type="text" class="form-control" name="contact_phone" id="contact_phone" placeholder="Teléfono" autocomplete="off" minlength="7" maxlength="9" data-fv-stringlength-message="Debe contener 7 ó 9 dígitos" required>
             </div>
+
+            <?php
+              $services = get_terms([
+                'taxonomy' => 'contact_services',
+                'hide_empty' => false,
+                'orderby' => 'term_id',
+                'order' => 'ASC'
+              ]);
+
+              if (count($services)) :
+            ?>
+              <div class="form-group">
+                <label for="contact_service" class="sr-only">Solución</label>
+                <select name="contact_service" id="contact_service" class="form-control" required data-fv-notempty-message="Debe indicar el tipo de solución que busca">
+                  <option value="">¿Qué servicio te interesa?</option>
+                  <?php foreach ($services as $service) : ?>
+                    <option value="<?php echo $service->term_id ?>"><?php echo $service->name; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            <?php endif; ?>
+
             <div class="form-group">
               <label for="contact_message" class="sr-only">Escribe tu mensaje</label>
               <textarea class="form-control" name="contact_message" id="contact_message" placeholder="Escribe tu mensaje" required></textarea>
             </div>
 
-            <p class="text-center alert alert-danger" id="js-form-contact-msg">Se envió correctamente su mensaje</p>
+            <p class="text-center" id="js-form-contact-msg"></p>
 
             <p class="Form-button text-center">
-              <button type="submit" class="Button Button--red text-uppercase">enviar <span class="Form-loader rotateIn hidden" id="js-form-contact-loader"><i class="glyphicon glyphicon-refresh"></i></span></button>
+              <button type="submit" class="Button Button--red Button--red--invert text-uppercase">enviar <span class="Form-loader rotateIn hidden" id="js-form-contact-loader"><i class="glyphicon glyphicon-refresh"></i></span></button>
             </p>
           </form>
         </article>

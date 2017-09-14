@@ -93,21 +93,6 @@
 
               wp_nav_menu($args);
             ?>
-
-            <?php /*
-            <nav class="Header-nav" id="navbar-mainmenu">
-              <ul class="Header-nav-list nav" role="tablist">
-                <li class="active"><a href="index.html">Inicio</a></li>
-                <li><a href="">Salón & Spa</a></li>
-                <li><a href="#peinados-y-cortes">Peinados y cortes</a></li>
-                <li><a href="#masajes">Masajes</a></li>
-                <li><a href="#maquillaje">Maquillaje</a></li>
-              </ul>
-              <aside class="Header-button text-center">
-                <a href="" class="Button Button--white Button--medium Button--border text-uppercase">Haz tu reserva</a>
-              </aside>
-            </nav>
-            */ ?>
           </section>
         </div>
       </div>

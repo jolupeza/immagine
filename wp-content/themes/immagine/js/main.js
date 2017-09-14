@@ -51,9 +51,9 @@ var j = jQuery.noConflict();
         onSliderLoad: function () {
           j('.bx-controls-direction a').on('click', function(){
             var i = $(this).attr('data-slide-index');
-              sldHistory.goToSlide(i);
-              sldHistory.stopAuto();
-              sldHistory.startAuto();
+              sldServices.goToSlide(i);
+              sldServices.stopAuto();
+              sldServices.startAuto();
               return false;
           });
         }
@@ -68,6 +68,49 @@ var j = jQuery.noConflict();
       arrow.fadeIn();
     } else {
       arrow.fadeOut();
+    }
+  });
+
+  $win.on('resize', function(){
+    var bx = j('.Services');
+
+    if (bx.length) {
+      var bxViewport = bx.parent(),
+          widthBxSlider = parseInt(bxViewport.width()),
+          slides = 0;
+
+      if ($win.width() > 991) {
+        widthBxSlider = widthBxSlider / 3;
+        slides = 3;
+      } else if ($win.width() > 600) {
+        widthBxSlider = widthBxSlider / 2;
+        slides = 2;
+      } else {
+        widthBxSlider = 0;
+        slides = 1;
+      }
+
+      sldServices.reloadSlider({
+        auto: true,
+        autoHover: true,
+        minSlides: slides,
+        maxSlides: slides,
+        moveSlides: 1,
+        slideWidth: widthBxSlider,
+        slideMargin: 25,
+        pager: false,
+        prevText: '<i class="icon-keyboard_arrow_left"></i>',
+        nextText: '<i class="icon-keyboard_arrow_right"></i>',
+        onSliderLoad: function () {
+          j('.bx-controls-direction a').on('click', function(){
+            var i = $(this).attr('data-slide-index');
+              sldServices.goToSlide(i);
+              sldServices.stopAuto();
+              sldServices.startAuto();
+              return false;
+          });
+        }
+      });
     }
   });
 
@@ -132,7 +175,7 @@ var j = jQuery.noConflict();
         $form.data('formValidation').resetForm(true);
 
         if (data.result) {
-          msg.text('Ya tenemos su consulta. En breve nos pondremos en contacto con usted.').addClass('alert alert-info');
+          msg.text('Ya tenemos su consulta. En breve nos pondremos en contacto con usted.').addClass('alert alert-success');
         } else {
           msg.text(data.error).addClass('alert alert-danger');
         }
@@ -141,7 +184,7 @@ var j = jQuery.noConflict();
         msg.fadeIn('slow');
         setTimeout(function(){
           msg.fadeOut('slow', function(){
-              j(this).text('').removeClass('alert alert-info alert-danger');
+              j(this).text('').removeClass('alert alert-success alert-danger');
           });
         }, 5000);
       }, 'json').fail(function(){

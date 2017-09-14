@@ -46,8 +46,8 @@
               if (count($services)) :
             ?>
               <div class="form-group">
-                <label for="contact_service" class="sr-only">Solución</label>
-                <select name="contact_service" id="contact_service" class="form-control" required data-fv-notempty-message="Debe indicar el tipo de solución que busca">
+                <label for="contact_service" class="sr-only">Servicio</label>
+                <select name="contact_service" id="contact_service" class="form-control" required data-fv-notempty-message="Debe indicar que servicio le interesa">
                   <option value="">¿Qué servicio te interesa?</option>
                   <?php foreach ($services as $service) : ?>
                     <option value="<?php echo $service->term_id ?>"><?php echo $service->name; ?></option>

@@ -2,6 +2,7 @@ body {
   color: black;
   font-family: "montserratregular";
   font-size: 16px;
+  position: relative;
 }
 
 a {
@@ -157,14 +158,29 @@ p {
   color: black;
 }
 .Button--white:hover, .Button--white:focus {
-  background-color: #bf0811;
+  background-color: #fe4431;
   color: white;
 }
 .Button--border {
   border: 1px solid black;
 }
 .Button--border:hover, .Button--border:focus {
-  border-color: #bf0811;
+  border-color: #fe4431;
+}
+
+.ArrowTop {
+  background-color: #fe4431;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: none;
+  bottom: 25px;
+  color: #f2f2f2;
+  display: none;
+  height: 50px;
+  position: fixed;
+  right: 25px;
+  width: 50px;
 }
 
 .Form .form-control {
@@ -220,7 +236,42 @@ p {
   width: 100%;
   z-index: 99;
 }
+.Header.affix {
+  padding: 0;
+  z-index: 99;
+}
+.Header.affix .Header-top {
+  margin-top: -35px;
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+.Header.affix .Header-menu {
+  background-color: #fff;
+}
+.Header.affix .Header-main {
+  padding: 10px 25px;
+}
 
+.Header-menu {
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.Header-top {
+  margin-top: 0;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
 .Header-top h3 {
   margin: 0;
   padding-left: 15px;
@@ -262,6 +313,10 @@ p {
   align-items: center;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  -moz-transition: all 0.6s ease-in;
+  -o-transition: all 0.6s ease-in;
+  -webkit-transition: all 0.6s ease-in;
+  transition: all 0.6s ease-in;
   padding: 20px 25px;
 }
 
@@ -277,6 +332,8 @@ p {
 }
 
 .Header-nav-list {
+  -webkit-align-items: center;
+  align-items: center;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: flex-end;
@@ -295,17 +352,38 @@ p {
 .Header-nav-list li a {
   color: black;
   display: block;
+  padding: 0;
 }
 .Header-nav-list li a:hover, .Header-nav-list li a:focus {
+  background-color: transparent;
   text-decoration: none;
 }
-.Header-nav-list li.active a::after, .Header-nav-list li:hover a::after, .Header-nav-list li:focus a::after {
-  background-color: #fe4431;
+.Header-nav-list li a::after {
+  background-color: transparent;
   content: "";
   display: block;
   height: 3px;
   margin: 7px auto 0;
   width: 80%;
+}
+.Header-nav-list li a.Button {
+  font-size: 1em;
+  padding: 15px;
+}
+.Header-nav-list li a.Button::after {
+  display: none;
+}
+.Header-nav-list li a.Button:hover, .Header-nav-list li a.Button:focus {
+  background-color: #fe4431;
+  color: white;
+}
+.Header-nav-list li.active a::after, .Header-nav-list li:hover a::after, .Header-nav-list li:focus a::after {
+  background-color: #fe4431;
+}
+.Header-nav-list li.active a.Button, .Header-nav-list li:hover a.Button, .Header-nav-list li:focus a.Button {
+  background-color: #fe4431;
+  border-color: #fe4431;
+  color: white;
 }
 
 .Carousel--home .carousel-indicators {
@@ -461,6 +539,7 @@ p {
 
 .Page {
   background-color: #f2f2f2;
+  padding: 58px 0 0;
   position: relative;
 }
 .Page--carousel::before {
@@ -475,6 +554,51 @@ p {
 }
 .Page--contact {
   background-color: #191919;
+}
+
+.Services-wrapper {
+  margin-top: -120px;
+}
+.Services-wrapper .bx-wrapper {
+  background-color: transparent;
+  border: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.Services-wrapper .bx-wrapper .bx-controls-direction {
+  margin-top: 15px;
+  text-align: center;
+}
+.Services-wrapper .bx-wrapper .bx-prev, .Services-wrapper .bx-wrapper .bx-next {
+  background: none;
+  border: 1px solid #212121;
+  color: #212121;
+  display: inline-block;
+  font-size: 2em;
+  height: auto;
+  left: auto;
+  line-height: 1.1em;
+  margin-top: 0;
+  overflow: hidden;
+  position: relative;
+  right: auto;
+  text-indent: initial;
+  top: auto;
+  width: auto;
+  z-index: 1;
+}
+.Services-wrapper .bx-wrapper .bx-prev:hover, .Services-wrapper .bx-wrapper .bx-prev:focus, .Services-wrapper .bx-wrapper .bx-next:hover, .Services-wrapper .bx-wrapper .bx-next:focus {
+  border-color: #bf0811;
+  color: #bf0811;
+  text-decoration: none;
+}
+.Services-wrapper .bx-wrapper .bx-prev {
+  margin-right: 20px;
+}
+
+.Services-item {
+  min-height: 500px;
 }
 
 .Services-data {

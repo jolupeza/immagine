@@ -27,14 +27,27 @@
     background-color: #fff;
     color: black;
     &:hover, &:focus {
-      background-color: $red;
+      background-color: $redSoft;
       color: white;
     }
   }
   &--border {
     border: 1px solid black;
     &:hover, &:focus {
-      border-color: $red;
+      border-color: $redSoft;
     }
   }
+}
+
+.ArrowTop {
+  background-color: $redSoft;
+  @include border-radius(50%);
+  border: none;
+  bottom: 25px;
+  color: $white;
+  display: none;
+  height: 50px;
+  position: fixed;
+  right: 25px;
+  width: 50px;
 }

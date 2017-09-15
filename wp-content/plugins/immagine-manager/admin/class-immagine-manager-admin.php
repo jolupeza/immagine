@@ -317,7 +317,7 @@ class Immagine_Manager_Admin
                 'author',
                 'thumbnail',
                 'page-attributes',
-                // 'excerpt'
+                 'excerpt'
                 // 'trackbacks'
                 // 'comments',
                 // 'revisions',
@@ -461,6 +461,45 @@ class Immagine_Manager_Admin
         }
 
         return false;
+    }
+    
+    /**
+     * Add custom taxonomies areas to post type sliders.
+     */
+    public function add_taxonomies_sliders()
+    {
+        $labels = array(
+            'name' => _x('Región', 'Taxonomy plural name', $this->domain),
+            'singular_name' => _x('Región', 'Taxonomy singular name', $this->domain),
+            'search_items' => __('Buscar Región', $this->domain),
+            'popular_items' => __('Regiones Populares', $this->domain),
+            'all_items' => __('Todas las Regiones', $this->domain),
+            'parent_item' => __('Región Padre', $this->domain),
+            'parent_item_colon' => __('Región Padre', $this->domain),
+            'edit_item' => __('Editar Región', $this->domain),
+            'update_item' => __('Actualizar Región', $this->domain),
+            'add_new_item' => __('Añadir nueva Región', $this->domain),
+            'new_item_name' => __('Nueva Región', $this->domain),
+            'add_or_remove_items' => __('Añadir o eliminar Región', $this->domain),
+            'choose_from_most_used' => __('Choose from most used text-domain', $this->domain),
+            'menu_name' => __('Regiones Sliders', $this->domain),
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => false,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_admin_column' => true,
+            'hierarchical' => true,
+            'show_tagcloud' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'rewrite' => false,
+//            'capabilities' => array(),
+        );
+
+        register_taxonomy('regions', 'sliders', $args);
     }
     
     /**

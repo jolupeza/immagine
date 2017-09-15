@@ -9,7 +9,7 @@ wp-content/upgrade/
 #wp-content/uploads/
 wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
-#wp-content/plugins/tc-manager/admin/.sass-cache/
+wp-content/plugins/immagine-manager/admin/.sass-cache/
 
 /license.txt
 /readme.html

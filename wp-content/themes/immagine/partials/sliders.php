@@ -4,6 +4,13 @@
     'posts_per_page' => -1,
     'orderby' => 'menu_order',
     'order' => 'ASC',
+    'tax_query' => [
+      [
+        'taxonomy' => 'regions',
+        'field' => 'slug',
+        'terms' => 'main'
+      ]
+    ]
   ];
 
   $the_query = new WP_Query($args);
@@ -62,3 +69,4 @@
     <?php endif; ?>
   </div>
 <?php endif; ?>
+<?php wp_reset_postdata(); ?>

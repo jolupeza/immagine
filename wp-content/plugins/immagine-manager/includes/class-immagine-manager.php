@@ -104,6 +104,7 @@ class Immagine_Manager
         
         $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_sliders_add');
         $this->loader->add_action('save_post', $admin, 'cd_mb_sliders_save' );
+        $this->loader->add_action('init', $admin, 'add_taxonomies_sliders');
         
         $this->loader->add_action('init', $admin, 'add_taxonomies_services');
         

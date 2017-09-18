@@ -19,6 +19,10 @@
       padding: 10px 25px;
     }
   }
+  @media screen and (max-width: 991px) {
+    background-color: #fff;
+    padding: 0;
+  }
 }
 .Header-menu {
   @include transition(all 0.5s ease);
@@ -63,6 +67,9 @@
   @include justify-content(space-between);
   @include transition(all 0.6s ease-in);
   padding: 20px 25px;
+  @media screen and (max-width: 991px) {
+    padding: 10px 0;
+  }
 }
 .Header-logo {
   margin: 0;
@@ -101,6 +108,7 @@
         width: 80%;
       }
       &.Button {
+        font-family: "montserratsemibold";
         font-size: 1em;
         padding: 15px;
         &::after {
@@ -124,5 +132,10 @@
         }
       }
     }
+  }
+}
+.Header-toggle {
+  .Icons {
+    cursor: pointer;
   }
 }

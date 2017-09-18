@@ -1,0 +1,15 @@
+.Icons {
+  &::before {
+    background-image: url('./../images/sprites.png');
+    background-repeat: no-repeat;
+    content: "";
+    display: block;
+  }
+  &--bars {
+    &::before {
+      background-position: 0 0;
+      height: 30px;
+      width: 30px;
+    }
+  }
+}

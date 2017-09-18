@@ -183,6 +183,18 @@ p {
   width: 50px;
 }
 
+.Icons::before {
+  background-image: url("./../images/sprites.png");
+  background-repeat: no-repeat;
+  content: "";
+  display: block;
+}
+.Icons--bars::before {
+  background-position: 0 0;
+  height: 30px;
+  width: 30px;
+}
+
 .Form .form-control {
   border: none;
   -moz-border-radius: 0;
@@ -253,6 +265,12 @@ p {
 .Header.affix .Header-main {
   padding: 10px 25px;
 }
+@media screen and (max-width: 991px) {
+  .Header {
+    background-color: #fff;
+    padding: 0;
+  }
+}
 
 .Header-menu {
   -moz-transition: all 0.5s ease;
@@ -319,6 +337,11 @@ p {
   transition: all 0.6s ease-in;
   padding: 20px 25px;
 }
+@media screen and (max-width: 991px) {
+  .Header-main {
+    padding: 10px 0;
+  }
+}
 
 .Header-logo {
   margin: 0;
@@ -367,6 +390,7 @@ p {
   width: 80%;
 }
 .Header-nav-list li a.Button {
+  font-family: "montserratsemibold";
   font-size: 1em;
   padding: 15px;
 }
@@ -386,6 +410,10 @@ p {
   color: white;
 }
 
+.Header-toggle .Icons {
+  cursor: pointer;
+}
+
 .Carousel--home .carousel-indicators {
   bottom: 100px;
   left: 0;
@@ -394,8 +422,22 @@ p {
   width: 100%;
 }
 .Carousel--home .carousel-indicators li {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
   height: 15px;
   width: 15px;
+}
+@media screen and (max-width: 991px) {
+  .Carousel--home .carousel-indicators li {
+    height: 20px;
+    width: 20px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .Carousel--home .carousel-indicators {
+    bottom: 15px;
+  }
 }
 .Carousel--home .carousel-control {
   -webkit-align-items: center;
@@ -441,6 +483,13 @@ p {
   top: 0;
   width: 50%;
 }
+@media screen and (max-width: 991px) {
+  .Carousel--home .carousel-caption {
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
 .Carousel--home .Caption {
   margin-bottom: 15px;
   margin-top: 0;
@@ -456,6 +505,16 @@ p {
   color: white;
   font-family: "albret";
   font-size: 8.75em;
+}
+@media screen and (max-width: 991px) {
+  .Carousel--home .Caption-title {
+    font-size: 6em;
+  }
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Carousel--home .Caption-title {
+    font-size: 5em;
+  }
 }
 .Carousel--home .Caption-background {
   background-color: #fff;
@@ -476,8 +535,19 @@ p {
 .Carousel--home .Caption-buttons .Button:last-child {
   margin-right: 0;
 }
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Carousel--home .Caption-buttons .Button {
+    margin-right: 15px;
+    padding: 15px;
+  }
+}
 .Carousel--about {
   padding-top: 90px;
+}
+@media screen and (max-width: 991px) {
+  .Carousel--about {
+    padding-top: 50px;
+  }
 }
 .Carousel--about .item img {
   border: 8px solid #212121;
@@ -493,10 +563,20 @@ p {
   top: auto;
   width: 60%;
 }
+@media screen and (max-width: 991px) {
+  .Carousel--about .carousel-caption {
+    width: 80%;
+  }
+}
 .Carousel--about .carousel-caption p {
   color: black;
   font-size: 1.125em;
   text-align: justify;
+}
+@media screen and (max-width: 767px) {
+  .Carousel--about .carousel-caption p {
+    font-size: 1em;
+  }
 }
 .Carousel--about .Caption-title {
   font-family: "montserratsemibold";
@@ -533,14 +613,44 @@ p {
 .Carousel--about .carousel-control.right {
   right: 30%;
 }
+@media screen and (max-width: 991px) {
+  .Carousel--about .carousel-control.right {
+    right: 20%;
+  }
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Carousel--about .carousel-control.right {
+    right: 15px;
+  }
+}
 .Carousel--about .carousel-control.left {
   left: 30%;
+}
+@media screen and (max-width: 991px) {
+  .Carousel--about .carousel-control.left {
+    left: 20%;
+  }
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Carousel--about .carousel-control.left {
+    left: 15px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .Carousel--about .carousel-control {
+    top: 220px;
+  }
 }
 
 .Page {
   background-color: #f2f2f2;
   padding: 58px 0 0;
   position: relative;
+}
+@media screen and (max-width: 991px) {
+  .Page {
+    padding-top: 74px;
+  }
 }
 .Page--carousel::before {
   background-color: #212121;
@@ -630,11 +740,27 @@ p {
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
+@media screen and (max-width: 991px) {
+  .Contact-wrapper {
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+}
 
 .Contact-form {
   width: 50%;
 }
+@media screen and (max-width: 991px) {
+  .Contact-form {
+    width: 100%;
+  }
+}
 .Contact-form .Form {
   margin: 25px auto;
   width: 70%;
+}
+@media screen and (max-width: 767px) {
+  .Contact-form .Form {
+    width: 100%;
+  }
 }

@@ -2,6 +2,9 @@
   background-color: $white;
   padding: 58px 0 0;
   position: relative;
+  @media screen and (max-width: 991px) {
+    padding-top: 74px;
+  }
   &--carousel {
     &::before {
       background-color: $black;

@@ -7,11 +7,20 @@
 .Contact-wrapper {
   @include display-flex();
   @include justify-content(flex-end);
+  @media screen and (max-width: 991px) {
+    @include justify-content(center);
+  }
 }
 .Contact-form {
   width: 50%;
+  @media screen and (max-width: 991px) {
+    width: 100%;
+  }
   .Form {
     margin: 25px auto;
     width: 70%;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 }

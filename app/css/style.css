@@ -266,6 +266,11 @@ p {
   padding: 10px 25px;
 }
 @media screen and (max-width: 991px) {
+  .Header.affix .Header-main {
+    padding: 10px 0;
+  }
+}
+@media screen and (max-width: 991px) {
   .Header {
     background-color: #fff;
     padding: 0;
@@ -542,6 +547,7 @@ p {
   }
 }
 .Carousel--about {
+  min-height: 750px;
   padding-top: 90px;
 }
 @media screen and (max-width: 991px) {
@@ -668,6 +674,12 @@ p {
 
 .Services-wrapper {
   margin-top: -120px;
+  min-height: 650px;
+}
+@media screen and (max-width: 991px) {
+  .Services-wrapper {
+    margin-top: -80px;
+  }
 }
 .Services-wrapper .bx-wrapper {
   background-color: transparent;

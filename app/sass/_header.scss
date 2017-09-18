@@ -17,6 +17,9 @@
     }
     .Header-main {
       padding: 10px 25px;
+      @media screen and (max-width: 991px) {
+        padding: 10px 0;
+      }
     }
   }
   @media screen and (max-width: 991px) {

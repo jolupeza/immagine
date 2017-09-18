@@ -265,6 +265,50 @@ class Immagine_Manager_Admin
                 break;
         }
     }
+    
+    /**
+     * Registers the meta box that will be used to display all of the post meta data
+     * associated with post type page.
+     */
+    public function cd_mb_pages_add()
+    {
+        add_meta_box(
+            'mb-pages-id', 'Configuraciones', array($this, 'render_mb_pages'), 'page', 'normal', 'core'
+        );
+    }
+
+    public function cd_mb_pages_save($post_id)
+    {
+        // Bail if we're doing an auto save
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        // if our nonce isn't there, or we can't verify it, bail
+        if (!isset($_POST['meta_box_nonce']) || !wp_verify_nonce($_POST['meta_box_nonce'], 'page_meta_box_nonce')) {
+            return;
+        }
+
+        // if our current user can't edit this post, bail
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
+        // Image Responsive
+        if (isset($_POST['mb_responsive']) && !empty($_POST['mb_responsive'])) {
+            update_post_meta($post_id, 'mb_responsive', esc_attr($_POST['mb_responsive']));
+        } else {
+            delete_post_meta($post_id, 'mb_responsive');
+        }
+    }
+
+    /**
+     * Requires the file that is used to display the user interface of the post meta box.
+     */
+    public function render_mb_pages()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/immagine-mb-page.php';
+    }
 
     /**
      * Add custom content type slides.

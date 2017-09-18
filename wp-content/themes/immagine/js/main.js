@@ -6,7 +6,7 @@ var j = jQuery.noConflict();
   var $win = j(window),
       $doc = j(document),
       $body = j('body'),
-      sldServices;
+      sldServices = [];
 
   function affixHeader() {
     j('.Header').affix({
@@ -22,41 +22,48 @@ var j = jQuery.noConflict();
     var bx = j('.Services');
 
     if (bx.length) {
-      var bxViewport = bx.parent(),
-          widthBxSlider = parseInt(bxViewport.width()),
-          slides = 0;
+      bx.each(function(index) {
+        var $this = j(this),
+            id = $this.data('id'),
+            bxViewport = $this.parent(),
+            widthBxSlider = parseInt(bxViewport.width()),
+            slides = 0;
 
-      if ($win.width() > 991) {
-        widthBxSlider = widthBxSlider / 3;
-        slides = 3;
-      } else if ($win.width() > 600) {
-        widthBxSlider = widthBxSlider / 2;
-        slides = 2;
-      } else {
-        widthBxSlider = 0;
-        slides = 1;
-      }
-
-      sldServices = bx.bxSlider({
-        auto: true,
-        autoHover: true,
-        minSlides: slides,
-        maxSlides: slides,
-        moveSlides: 1,
-        slideWidth: widthBxSlider,
-        slideMargin: 25,
-        pager: false,
-        prevText: '<i class="icon-keyboard_arrow_left"></i>',
-        nextText: '<i class="icon-keyboard_arrow_right"></i>',
-        onSliderLoad: function () {
-          j('.bx-controls-direction a').on('click', function(){
-            var i = $(this).attr('data-slide-index');
-              sldServices.goToSlide(i);
-              sldServices.stopAuto();
-              sldServices.startAuto();
-              return false;
-          });
+        if ($win.width() > 991) {
+          widthBxSlider = widthBxSlider / 3;
+          slides = 3;
+        } else if ($win.width() > 600) {
+          widthBxSlider = widthBxSlider / 2;
+          slides = 2;
+        } else {
+          widthBxSlider = 0;
+          slides = 1;
         }
+
+        sldServices[index] = {
+          'id': id,
+          'bx': bx.bxSlider({
+              auto: true,
+              autoHover: true,
+              minSlides: slides,
+              maxSlides: slides,
+              moveSlides: 1,
+              slideWidth: widthBxSlider,
+              slideMargin: 25,
+              pager: false,
+              prevText: '<i class="icon-keyboard_arrow_left"></i>',
+              nextText: '<i class="icon-keyboard_arrow_right"></i>',
+              onSliderLoad: function () {
+                j('.bx-controls-direction a').on('click', function(){
+                  var i = $(this).attr('data-slide-index');
+                    sldServices[index].goToSlide(i);
+                    sldServices[index].stopAuto();
+                    sldServices[index].startAuto();
+                    return false;
+                });
+              }
+            })
+        };
       });
     }
   }
@@ -72,52 +79,52 @@ var j = jQuery.noConflict();
   });
 
   $win.on('resize', function(){
-    var bx = j('.Services');
-
-    if (bx.length) {
-      var bxViewport = bx.parent(),
-          widthBxSlider = parseInt(bxViewport.width()),
-          slides = 0;
-
-      if ($win.width() > 991) {
-        widthBxSlider = widthBxSlider / 3;
-        slides = 3;
-      } else if ($win.width() > 600) {
-        widthBxSlider = widthBxSlider / 2;
-        slides = 2;
-      } else {
-        widthBxSlider = 0;
-        slides = 1;
-      }
-
-      sldServices.reloadSlider({
-        auto: true,
-        autoHover: true,
-        minSlides: slides,
-        maxSlides: slides,
-        moveSlides: 1,
-        slideWidth: widthBxSlider,
-        slideMargin: 25,
-        pager: false,
-        prevText: '<i class="icon-keyboard_arrow_left"></i>',
-        nextText: '<i class="icon-keyboard_arrow_right"></i>',
-        onSliderLoad: function () {
-          j('.bx-controls-direction a').on('click', function(){
-            var i = $(this).attr('data-slide-index');
-              sldServices.goToSlide(i);
-              sldServices.stopAuto();
-              sldServices.startAuto();
-              return false;
-          });
-        }
-      });
-    }
+    // var bx = j('.Services');
+    //
+    // if (bx.length) {
+    //   var bxViewport = bx.parent(),
+    //       widthBxSlider = parseInt(bxViewport.width()),
+    //       slides = 0;
+    //
+    //   if ($win.width() > 991) {
+    //     widthBxSlider = widthBxSlider / 3;
+    //     slides = 3;
+    //   } else if ($win.width() > 600) {
+    //     widthBxSlider = widthBxSlider / 2;
+    //     slides = 2;
+    //   } else {
+    //     widthBxSlider = 0;
+    //     slides = 1;
+    //   }
+    //
+    //   sldServices.reloadSlider({
+    //     auto: true,
+    //     autoHover: true,
+    //     minSlides: slides,
+    //     maxSlides: slides,
+    //     moveSlides: 1,
+    //     slideWidth: widthBxSlider,
+    //     slideMargin: 25,
+    //     pager: false,
+    //     prevText: '<i class="icon-keyboard_arrow_left"></i>',
+    //     nextText: '<i class="icon-keyboard_arrow_right"></i>',
+    //     onSliderLoad: function () {
+    //       j('.bx-controls-direction a').on('click', function(){
+    //         var i = $(this).attr('data-slide-index');
+    //           sldServices.goToSlide(i);
+    //           sldServices.stopAuto();
+    //           sldServices.startAuto();
+    //           return false;
+    //       });
+    //     }
+    //   });
+    //}
   });
 
   $doc.on('ready', function() {
     affixHeader();
 
-    bxSliderServices();
+      bxSliderServices();
 
     j('.js-move-scroll').on('click', function(event) {
       event.preventDefault();

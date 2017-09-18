@@ -1,5 +1,9 @@
 .Services-wrapper {
   margin-top: -120px;
+  min-height: 650px;
+  @media screen and (max-width: 991px) {
+    margin-top: -80px;
+  }
   .bx-wrapper {
     background-color: transparent;
     border: none;

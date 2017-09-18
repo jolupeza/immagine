@@ -104,6 +104,7 @@
     }
   }
   &--about {
+    min-height: 750px;
     padding-top: 90px;
     @media screen and (max-width: 991px) {
       padding-top: 50px;

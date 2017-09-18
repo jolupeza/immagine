@@ -34,16 +34,23 @@
         <?php
           $values = get_post_custom(get_the_id());
           $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+          $responsive = isset($values['mb_responsive']) ? esc_attr($values['mb_responsive'][0]) : '';
         ?>
 
         <?php if (has_post_thumbnail()) : ?>
           <div class="item<?php echo ($j === 0) ? ' active' : ''; ?>">
-            <?php
-              the_post_thumbnail('full', [
-                'class' => 'img-responsive center-block',
-                'alt' => !empty($title) ? $title : ''
-              ]);
-            ?>
+            <picture>
+              <?php if (!empty($responsive)) : ?>
+                <source class="img-responsive center-block" media="(max-width: 767px) and (orientation: portrait)" srcset="<?php echo $responsive; ?>" />
+              <?php endif; ?>
+              <?php
+                the_post_thumbnail('full', [
+                  'class' => 'img-responsive center-block',
+                  'alt' => !empty($title) ? $title : ''
+                ]);
+              ?>
+            </picture>
+
             <div class="carousel-caption">
               <h3 class="Caption Caption-slogan text-center"><span class="Caption-background"><?php echo get_the_content(''); ?></span></h3>
               <?php if (!empty($title)) : ?><h2 class="text-center Caption Caption-title"><?php echo $title; ?></h2><?php endif; ?>

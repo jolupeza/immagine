@@ -14,11 +14,28 @@ function display_custom_options_link() {
 add_action('customize_register', 'immagine_customize_register');
 
 function immagine_customize_register($wp_customize) {
+  //
+  $wp_customize->add_section('immagine_image', [
+    'title' => __('Imagen del sitio', THEMEDOMAIN),
+    'description' => __('Configurar y cargar logo responsive', THEMEDOMAIN),
+    'priority' => 35
+  ]);
+
+  $wp_customize->add_setting('immagine_custom_settings[logo]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'logo', array(
+    'label' => __('Logo Móvil', THEMEDOMAIN),
+    'section' => 'immagine_image',
+    'settings' => 'immagine_custom_settings[logo]'
+  )));
+
   // Links Social Media
   $wp_customize->add_section('immagine_social', [
     'title' => __('Links Redes Sociales', THEMEDOMAIN),
     'description' => __('Mostrar links a redes sociales', THEMEDOMAIN),
-    'priority' => 35
+    'priority' => 36
   ]);
 
   $wp_customize->add_setting('immagine_custom_settings[display_social_link]', [
@@ -89,7 +106,7 @@ function immagine_customize_register($wp_customize) {
   $wp_customize->add_section('immagine_info', [
     'title' => __('Información de la Web', THEMEDOMAIN),
     'description' => __('Configuración acerca de información relevante de la Web', THEMEDOMAIN),
-    'priority' => 36
+    'priority' => 37
   ]);
 
   $wp_customize->add_setting('immagine_custom_settings[display_top_menu]', [

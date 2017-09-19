@@ -16,7 +16,7 @@
 
     <?php wp_head(); ?>
   </head>
-  <body <?php body_class(); ?> data-spy="scroll" data-target="#navbar-mainmenu">
+  <body <?php body_class(); ?> data-spy="scroll" data-target=".navbar-mainmenu">
     <header class="Header">
       <?php $options = get_option('immagine_custom_settings'); ?>
 
@@ -78,7 +78,7 @@
         ?>
         <div class="container">
           <section class="Header-main">
-            <aside class="Header-toggle hidden-md hidden-lg">
+            <aside class="Header-toggle hidden-md hidden-lg js-toggle-slidebar">
               <i class="Icons Icons--bars"></i>
             </aside>
             <h1 class="Header-logo">
@@ -94,8 +94,7 @@
               $args = [
                 'theme_location' => 'main-menu',
                 'container' => 'nav',
-                'container_class' => 'Header-nav hidden-xs hidden-sm',
-                'container_id' => 'navbar-mainmenu',
+                'container_class' => 'Header-nav hidden-xs hidden-sm navbar-mainmenu',
                 'menu_class' => 'Header-nav-list nav',
                 'walker' => new Immagine_Walker_Nav_menu(),
               ];
@@ -109,3 +108,9 @@
         </div>
       </div>
     </header>
+
+    <?php
+      if (file_exists(TEMPLATEPATH . '/partials/slidebar.php')) {
+        include TEMPLATEPATH . '/partials/slidebar.php';
+      }
+    ?>

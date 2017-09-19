@@ -8,6 +8,7 @@
     background-color: transparent;
     border: none;
     @include box-shadow(none);
+    min-width: 100%;
     .bx-controls-direction {
       margin-top: 15px;
       text-align: center;

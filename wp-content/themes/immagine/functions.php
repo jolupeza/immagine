@@ -43,6 +43,7 @@ add_action('after_setup_theme', 'my_theme_setup');
 function register_my_menus() {
   register_nav_menus([
     'main-menu' => __('Main Menu', THEMEDOMAIN),
+    'movil-menu' => __('Móvil Menu', THEMEDOMAIN),
   ]);
 }
 
@@ -111,13 +112,17 @@ class Immagine_Walker_Nav_Menu extends Walker_Nav_Menu
         $output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
 
         $varPost = get_post($item->object_id);
-        // dump_exit($varPost);
 
         // Link attributes.
         $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
         $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-        $attributes .= !empty($varPost->post_name) ? ' href="#' . esc_attr($varPost->post_name) . '"' : '';
+
+        if ($varPost->post_title === 'Inicio') {
+          $attributes .= ' href="#inicio"';
+        } else {
+          $attributes .= !empty($varPost->post_name) ? ' href="#' . esc_attr($varPost->post_name) . '"' : '';
+        }
 
         if ($varPost->post_type === 'page' && $varPost->post_name === 'haz-tu-reserva') {
           $attributes .= ' class="Button Button--white Button--medium Button--border js-move-scroll menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
@@ -190,7 +195,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-add_action('phpmailer_init', 'mailtrap');
+// add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {

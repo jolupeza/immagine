@@ -20,50 +20,46 @@ var j = jQuery.noConflict();
 
   function bxSliderServices() {
     var bx = j('.Services');
-
     if (bx.length) {
-      bx.each(function(index) {
-        var $this = j(this),
-            id = $this.data('id'),
-            bxViewport = $this.parent(),
-            widthBxSlider = parseInt(bxViewport.width()),
-            slides = 0;
+      bx.each(function(index, el) {
+        var $this = j(el),
+            widthBxSlider = parseInt($this.parent().width()),
+            slides = 3;
 
         if ($win.width() > 991) {
-          widthBxSlider = widthBxSlider / 3;
-          slides = 3;
-        } else if ($win.width() > 600) {
-          widthBxSlider = widthBxSlider / 2;
+          widthBxSlider = (widthBxSlider - 50) / 3;
+        } else if ($win.width() > 600){
+          widthBxSlider = (widthBxSlider - 25) / 2;
           slides = 2;
         } else {
           widthBxSlider = 0;
           slides = 1;
         }
 
-        sldServices[index] = {
-          'id': id,
-          'bx': bx.bxSlider({
-              auto: true,
-              autoHover: true,
-              minSlides: slides,
-              maxSlides: slides,
-              moveSlides: 1,
-              slideWidth: widthBxSlider,
-              slideMargin: 25,
-              pager: false,
-              prevText: '<i class="icon-keyboard_arrow_left"></i>',
-              nextText: '<i class="icon-keyboard_arrow_right"></i>',
-              onSliderLoad: function () {
-                j('.bx-controls-direction a').on('click', function(){
-                  var i = $(this).attr('data-slide-index');
-                    sldServices[index].goToSlide(i);
-                    sldServices[index].stopAuto();
-                    sldServices[index].startAuto();
-                    return false;
-                });
-              }
-            })
-        };
+        sldServices.push($this.bxSlider({
+          auto: true,
+          autoHover: true,
+          minSlides: slides,
+          maxSlides: slides,
+          moveSlides: 1,
+          slideWidth: widthBxSlider,
+          slideMargin: 25,
+          prevText: '<i class="icon-keyboard_arrow_left"></i>',
+          nextText: '<i class="icon-keyboard_arrow_right"></i>',
+          pager: false,
+          onSlidePrev: function($slideElement, oldIndex, newIndex) {
+            sldServices[index].goToSlide(newIndex);
+            sldServices[index].stopAuto();
+            sldServices[index].startAuto();
+            return false;
+          },
+          onSlideNext: function($slideElement, oldIndex, newIndex) {
+            sldServices[index].goToSlide(newIndex);
+            sldServices[index].stopAuto();
+            sldServices[index].startAuto();
+            return false;
+          }
+        }));
       });
     }
   }
@@ -79,52 +75,55 @@ var j = jQuery.noConflict();
   });
 
   $win.on('resize', function(){
-    // var bx = j('.Services');
-    //
-    // if (bx.length) {
-    //   var bxViewport = bx.parent(),
-    //       widthBxSlider = parseInt(bxViewport.width()),
-    //       slides = 0;
-    //
-    //   if ($win.width() > 991) {
-    //     widthBxSlider = widthBxSlider / 3;
-    //     slides = 3;
-    //   } else if ($win.width() > 600) {
-    //     widthBxSlider = widthBxSlider / 2;
-    //     slides = 2;
-    //   } else {
-    //     widthBxSlider = 0;
-    //     slides = 1;
-    //   }
-    //
-    //   sldServices.reloadSlider({
-    //     auto: true,
-    //     autoHover: true,
-    //     minSlides: slides,
-    //     maxSlides: slides,
-    //     moveSlides: 1,
-    //     slideWidth: widthBxSlider,
-    //     slideMargin: 25,
-    //     pager: false,
-    //     prevText: '<i class="icon-keyboard_arrow_left"></i>',
-    //     nextText: '<i class="icon-keyboard_arrow_right"></i>',
-    //     onSliderLoad: function () {
-    //       j('.bx-controls-direction a').on('click', function(){
-    //         var i = $(this).attr('data-slide-index');
-    //           sldServices.goToSlide(i);
-    //           sldServices.stopAuto();
-    //           sldServices.startAuto();
-    //           return false;
-    //       });
-    //     }
-    //   });
-    //}
+    var bx = j('.Services');
+    if (bx.length) {
+      bx.each(function(index, el) {
+        var $this = j(el),
+            widthBxSlider = parseInt($this.parent().width()),
+            slides = 3;
+
+        if ($win.width() > 991) {
+          widthBxSlider = (widthBxSlider - 50) / 3;
+        } else if ($win.width() > 600){
+          widthBxSlider = (widthBxSlider - 25) / 2;
+          slides = 2;
+        } else {
+          widthBxSlider = 0;
+          slides = 1;
+        }
+
+        sldServices[index].reloadSlider({
+          auto: true,
+          autoHover: true,
+          minSlides: slides,
+          maxSlides: slides,
+          moveSlides: 1,
+          slideWidth: widthBxSlider,
+          slideMargin: 25,
+          prevText: '<i class="icon-keyboard_arrow_left"></i>',
+          nextText: '<i class="icon-keyboard_arrow_right"></i>',
+          pager: false,
+          onSlidePrev: function($slideElement, oldIndex, newIndex) {
+            sldServices[index].goToSlide(newIndex);
+            sldServices[index].stopAuto();
+            sldServices[index].startAuto();
+            return false;
+          },
+          onSlideNext: function($slideElement, oldIndex, newIndex) {
+            sldServices[index].goToSlide(newIndex);
+            sldServices[index].stopAuto();
+            sldServices[index].startAuto();
+            return false;
+          }
+        });
+      });
+    }
   });
 
   $doc.on('ready', function() {
     affixHeader();
 
-      bxSliderServices();
+    bxSliderServices();
 
     j('.js-move-scroll').on('click', function(event) {
       event.preventDefault();
@@ -197,6 +196,20 @@ var j = jQuery.noConflict();
       }, 'json').fail(function(){
         alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
       });
+    });
+
+    j('.js-toggle-slidebar').on('click', function(ev) {
+      ev.preventDefault();
+      var slidebar = j('.Slidebar'),
+          backdrop = j('.Backdrop');
+
+      if (slidebar.hasClass('active')) {
+        slidebar.removeClass('active');
+        backdrop.removeClass('in');
+      } else {
+        slidebar.addClass('active');
+        backdrop.addClass('in');
+      }
     });
   });
 })(jQuery);

@@ -13,6 +13,7 @@
   width: 70%;
   z-index: 9999;
   @media screen and (max-width: 450px) {
+    margin-left: -90%;
     width: 90%;
   }
   &.active {
@@ -20,7 +21,6 @@
   }
 }
 .Slidebar-header {
-  // @include align-items(center);
   @include display-flex();
   @include justify-content(space-between);
   padding: 0 15px;
@@ -89,6 +89,14 @@
         &::after {
           background-color: white;
         }
+      }
+    }
+  }
+  > li {
+    > a {
+      padding: 0;
+      &:focus, &:hover {
+        background-color: transparent;
       }
     }
   }

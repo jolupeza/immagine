@@ -691,6 +691,7 @@ p {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  min-width: 100%;
 }
 .Services-wrapper .bx-wrapper .bx-controls-direction {
   margin-top: 15px;
@@ -804,6 +805,7 @@ p {
 }
 @media screen and (max-width: 450px) {
   .Slidebar {
+    margin-left: -90%;
     width: 90%;
   }
 }
@@ -896,6 +898,12 @@ p {
 }
 .Slidebar-nav-list li.active a::after, .Slidebar-nav-list li:hover a::after, .Slidebar-nav-list li:focus a::after {
   background-color: white;
+}
+.Slidebar-nav-list > li > a {
+  padding: 0;
+}
+.Slidebar-nav-list > li > a:focus, .Slidebar-nav-list > li > a:hover {
+  background-color: transparent;
 }
 
 .Slidebar-social {

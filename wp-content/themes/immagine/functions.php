@@ -211,7 +211,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-add_action('phpmailer_init', 'mailtrap');
+// add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {

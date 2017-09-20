@@ -93,7 +93,7 @@ function immagine_customize_register($wp_customize) {
   ]);
 
   $wp_customize->add_control('immagine_custom_settings[googleplus]', [
-    'label' => __('Whatsapp', THEMEDOMAIN),
+    'label' => __('Google+', THEMEDOMAIN),
     'section' => 'immagine_social',
     'settings' => 'immagine_custom_settings[googleplus]',
     'type' => 'text'

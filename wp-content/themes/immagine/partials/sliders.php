@@ -34,6 +34,7 @@
         <?php
           $values = get_post_custom(get_the_id());
           $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+          $service = isset($values['mb_service']) ? esc_attr($values['mb_service'][0]) : '';
           $responsive = isset($values['mb_responsive']) ? esc_attr($values['mb_responsive'][0]) : '';
         ?>
 
@@ -56,8 +57,11 @@
               <?php if (!empty($title)) : ?><h2 class="text-center Caption Caption-title"><?php echo $title; ?></h2><?php endif; ?>
 
               <aside class="Caption-buttons">
-                <a href="" class="Button Button--red text-uppercase">Ver servicios</a>
-                <a href="" class="Button Button--red text-uppercase">Haz tu reserva</a>
+                <?php if (!empty($service)) : ?>
+                  <?php $dataService = get_post($service); ?>
+                  <a href="#<?php echo $dataService->post_name; ?>" class="Button Button--red text-uppercase js-move-scroll">Ver servicios</a>
+                <?php endif; ?>
+                <a href="#haz-tu-reserva" class="Button Button--red text-uppercase js-move-scroll">Haz tu reserva</a>
               </aside>
             </div>
           </div>

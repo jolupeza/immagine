@@ -20,4 +20,31 @@
   &--contact {
     background-color: $blackDark;
   }
+  &--default {
+    padding: 0;
+    &::before {
+      background-color: $black;
+      content: "";
+      display: block;
+      height: 180px;
+      width: 100%;
+      @media screen and (max-width: 991px) {
+        height: 100px;
+      }
+    }
+    .Page-title {
+      color: $red;
+      font-family: "montserratsemibold";
+      font-size: 2em;
+      margin-bottom: 20px;
+      margin-top: 15px;
+    }
+    ul, ol {
+      li {
+        font-family: "montserratlight";
+        font-size: 0.875em;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }

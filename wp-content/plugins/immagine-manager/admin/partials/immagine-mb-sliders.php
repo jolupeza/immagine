@@ -13,6 +13,7 @@
         $values = get_post_custom( get_the_ID() );
         $responsive = isset( $values['mb_responsive'] ) ? esc_attr($values['mb_responsive'][0]) : '';
         $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+        $service = isset($values['mb_service']) ? esc_attr($values['mb_service'][0]) : '';
 
         wp_nonce_field( 'sliders_meta_box_nonce', 'meta_box_nonce' );
     ?>
@@ -22,6 +23,39 @@
         <label for="mb_title">Título: </label>
         <input type="text" name="mb_title" id="mb_title" value="<?php echo $title; ?>" />
     </p>
+    
+    <!-- Service -->
+    <?php
+        $args = [
+            'post_type' => 'page',
+            'posts_per_page' => -1,
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
+            'meta_query' => [
+                [
+                    'key' => 'mb_service',
+                    'value' => 'on',
+                    'compare' => '='
+                ]
+            ]
+        ];
+        $the_query = new WP_Query($args);
+        if ($the_query->have_posts()) :
+    ?>
+        <p class="content-mb">
+            <label for="mb_service">Servicio: </label>
+            <select name="mb_service" id="mb_service">
+                <option value="">-- No ha seleccionado Servicio --</option>
+                <?php while ($the_query->have_posts()) : ?>
+                    <?php $the_query->the_post(); ?>
+                    <option value="<?php echo get_the_ID(); ?>" <?php selected($service, get_the_ID()); ?>><?php the_title(); ?></option>
+                <?php endwhile; ?>
+            </select>
+        </p>
+    <?php
+        endif;
+        wp_reset_postdata();
+    ?>
     
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">Imagen Responsive</legend>

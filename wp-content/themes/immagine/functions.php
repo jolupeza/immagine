@@ -119,15 +119,31 @@ class Immagine_Walker_Nav_Menu extends Walker_Nav_Menu
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 
         if ($varPost->post_title === 'Inicio') {
-          $attributes .= ' href="#inicio"';
+          if (is_home()) {
+            $attributes .= ' href="#inicio"';
+          } else {
+            $attributes .= !empty($item->url) ? ' href="' . $item->url . '"' : '';
+          }
         } else {
-          $attributes .= !empty($varPost->post_name) ? ' href="#' . esc_attr($varPost->post_name) . '"' : '';
+          if (is_home()) {
+            $attributes .= !empty($varPost->post_name) ? ' href="#' . esc_attr($varPost->post_name) . '"' : '';
+          } else {
+            $attributes .= !empty($varPost->post_name) ? ' href="' . home_url() . '#' . $varPost->post_name . '"' : '';
+          }
         }
 
         if ($varPost->post_type === 'page' && $varPost->post_name === 'haz-tu-reserva') {
-          $attributes .= ' class="Button Button--white Button--medium Button--border js-move-scroll menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+          if (is_home()) {
+            $attributes .= ' class="Button Button--white Button--medium Button--border js-move-scroll menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+          } else {
+            $attributes .= ' class="Button Button--white Button--medium Button--border menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+          }
         } else {
-          $attributes .= ' class="js-move-scroll menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+          if (is_home()) {
+            $attributes .= ' class="js-move-scroll menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+          } else {
+            $attributes .= ' class="menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+          }
         }
 
         // Build HTML output and pass through the proper filter.
@@ -195,7 +211,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-// add_action('phpmailer_init', 'mailtrap');
+add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {

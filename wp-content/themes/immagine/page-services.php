@@ -62,7 +62,7 @@
               <article class="Services-data">
                 <h3 class="Services-title text-red text-uppercase"><?php the_title(); ?></h3>
                 <?php the_content(); ?>
-                <p><a href="" class="Button Button--red Button--red--invert text-uppercase">Consultar</a></p>
+                <p><a href="#haz-tu-reserva" class="Button Button--red Button--red--invert text-uppercase js-move-scroll">Consultar</a></p>
               </article>
             </li>
           <?php endwhile; ?>

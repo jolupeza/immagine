@@ -139,6 +139,13 @@ class Immagine_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_title');
         }
+        
+        // Service
+        if (isset($_POST['mb_service']) && !empty($_POST['mb_service'])) {
+            update_post_meta($post_id, 'mb_service', esc_attr($_POST['mb_service']));
+        } else {
+            delete_post_meta($post_id, 'mb_service');
+        }
 
         // Image Responsive
         if (isset($_POST['mb_responsive']) && !empty($_POST['mb_responsive'])) {
@@ -293,6 +300,10 @@ class Immagine_Manager_Admin
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
+        
+        // Service
+        $service = isset($_POST['mb_service']) && $_POST['mb_service'] ? 'on' : 'off';
+        update_post_meta($post_id, 'mb_service', $service);
 
         // Image Responsive
         if (isset($_POST['mb_responsive']) && !empty($_POST['mb_responsive'])) {

@@ -230,6 +230,18 @@ p {
   font-family: "montserratlight";
   font-size: 1em;
 }
+.Form .checkbox label {
+  color: white;
+  font-family: "montserratlight";
+  font-size: 1em;
+}
+.Form .checkbox label a {
+  color: white;
+  text-decoration: underline;
+}
+.Form .checkbox label a:hover {
+  color: #fe4431;
+}
 .Form textarea.form-control {
   height: 120px;
 }
@@ -674,6 +686,33 @@ p {
 }
 .Page--contact {
   background-color: #191919;
+}
+.Page--default {
+  padding: 0;
+}
+.Page--default::before {
+  background-color: #212121;
+  content: "";
+  display: block;
+  height: 180px;
+  width: 100%;
+}
+@media screen and (max-width: 991px) {
+  .Page--default::before {
+    height: 100px;
+  }
+}
+.Page--default .Page-title {
+  color: #bf0811;
+  font-family: "montserratsemibold";
+  font-size: 2em;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+.Page--default ul li, .Page--default ol li {
+  font-family: "montserratlight";
+  font-size: 0.875em;
+  margin-bottom: 10px;
 }
 
 .Services-wrapper {

@@ -11,10 +11,17 @@
 
     <?php
         $values = get_post_custom( get_the_ID() );
+        $service = isset( $values['mb_service'] ) ? esc_attr( $values['mb_service'][0] ) : '';
         $responsive = isset( $values['mb_responsive'] ) ? esc_attr($values['mb_responsive'][0]) : '';
 
         wp_nonce_field( 'page_meta_box_nonce', 'meta_box_nonce' );
     ?>
+    
+    <!--Service-->
+    <p class="content-mb">
+        <label for="mb_service">¿Es un servicio?: </label>        
+        <input type="checkbox" id="mb_service" name="mb_service" <?php checked( $service, 'on' ); ?> />
+    </p>
     
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">Imagen Responsive</legend>
